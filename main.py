@@ -1,22 +1,51 @@
-from pydantic_ai import Agent, Tool
+import traceback
+from pydantic_ai import Agent, Tool, UsageLimits
 from dotenv import load_dotenv
-from test_cases.parallel_doc_triage.mocked_tools import get_tools
+from test_cases.test_runner import run_tests
+import asyncio
+import json
 
 load_dotenv()
 
-async def main(system_prompt, user_prompt, tools):
-    MODEL = "gpt-4o-mini"
 
-    agent_tools = [
-        Tool(**tool) for tool in get_tools()
-    ]
+async def main(system_prompt, user_prompt, tools, output_type):
+    try:
+        MODEL = "gpt-4o-mini"
 
-    agent = Agent(
-        MODEL, system_prompt=system_prompt, user_prompt=user_prompt, tools=agent_tools
-    )
+        agent_tools = [Tool(**tool, max_retries=3) for tool in tools]
 
-    response = await agent.run()
-    print(response.output)
+        agent = Agent(
+            MODEL,
+            system_prompt=system_prompt,
+            tools=agent_tools,
+            output_type=output_type,
+            output_retries=3,
+        )
+
+        async with agent.iter(
+            user_prompt,
+            usage_limits=UsageLimits(request_limit=200),
+        ) as agent_run:
+            async for event in agent_run:
+                # print("[ EVENT ] \n")
+                # print(event)
+                # print("-" * 40)
+                pass
+
+        return agent_run.result.output
+    except Exception as e:
+        print(traceback.print_exc())
+        print("Error: ", e)
+        return None
+
+
+async def check_agent():
+    # result = await run_test("parallel_doc_triage", main)
+    result = await run_tests(main)
+    with open("test_results.json", "w") as f:
+        json.dump({"result": result}, f, indent=4)
+    return result
+
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(check_agent())

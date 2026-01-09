@@ -1,8 +1,8 @@
 {
   "name": "Batch Knowledge Base Research",
   "description": "Parallel retrieval from KB with citation synthesis",
-  "system_prompt": "Multi-agent research workflow:\n1. Worker Agents: Retrieve answers to questions in parallel from KB\n2. Synthesizer Agent: Unify answers with proper citations\n\nEach answer must cite which KB snippet it came from.",
-  "user_prompt": "Answer the 5 questions using the knowledge base.\n\nOutput JSON with:\n- 'answers': array of 5 answers\n- 'citations': mapping of answer to KB snippet ID\n- 'synthesis': unified summary if questions are related",
+  "system_prompt": "You are a policy research assistant. Your goal is to answer developer questions about company policies by searching the knowledge base. Always provide a concise synthesis and cite the specific KB IDs for each answer.",
+  "user_prompt": "I have several questions about our remote work and vacation policies. Can you answer them based on our internal knowledge base?\n\n1. What is the company's remote work policy?\n2. How many vacation days do employees get?\n3. What is the process for requesting time off?\n4. Are there any blackout dates for vacation?\n5. What happens to unused vacation days?",
   "time_limit_seconds": 300,
   "required_agents": ["worker", "synthesizer"],
   "evaluation_criteria": {
@@ -12,3 +12,4 @@
     "traceability": "Each answer cites source snippet"
   }
 }
+

@@ -1,8 +1,8 @@
 {
-  "name": "Long Context Compression",
-  "description": "Compress long conversation history and solve task from compressed state",
-  "system_prompt": "Multi-agent context management:\n1. Summarizer Agent: Compress 30-message history into stable state\n2. Solver Agent: Use only compressed state to answer final request\n\nThe summarizer must extract key facts, decisions, and context. The solver must work only from the summary.",
-  "user_prompt": "Process the conversation history and answer the final question.\n\nOutput JSON with:\n- 'compressed_state': summary of conversation\n- 'key_facts': extracted important information\n- 'final_answer': answer to the question\n- 'sources': which messages informed the answer",
+  "name": "Project Context Management",
+  "description": "Summarize project discussion and provide deployment recommendations",
+  "system_prompt": "You are a technical project manager. Your task is to review long conversation histories, extract key technical requirements, and provide a clear summary and recommendation for the next steps. Focus on accuracy and technical detail.",
+  "user_prompt": "I've been discussing our AWS deployment plans with the team. Can you summarize the key technical decisions we've made so far and tell me specifically what our final database choice and instance size was?",
   "time_limit_seconds": 300,
   "required_agents": ["summarizer", "solver"],
   "evaluation_criteria": {
@@ -12,3 +12,4 @@
     "traceability": "Can trace answer to source messages"
   }
 }
+

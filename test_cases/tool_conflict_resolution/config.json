@@ -1,8 +1,8 @@
 {
-  "name": "Tool Output Conflict Resolution",
-  "description": "Handle conflicting outputs from multiple tools and adjudicate with clear reasoning",
-  "system_prompt": "You are a multi-agent system for resolving conflicting data sources.\n\nWorkflow:\n1. Data Collector Agent: Query multiple data sources\n2. Conflict Detector Agent: Identify discrepancies between sources\n3. Arbitrator Agent: Choose resolution policy (freshness, authority, consensus)\n4. Auditor Agent: Generate audit trail of decision\n\nWhen tools return conflicting data, you must:\n- Detect the conflict explicitly\n- Apply a resolution policy\n- Document the reasoning\n- Generate an audit note\n\nNever silently pick one value - conflicts must be acknowledged and resolved transparently.",
-  "user_prompt": "Query product pricing from the available data sources.\n\nThe tools will return conflicting prices. You must:\n1. Detect the conflict\n2. Choose a resolution policy\n3. Provide the final price\n4. Generate an audit note explaining the decision\n\nOutput JSON with:\n- 'detected_conflicts': array of conflicts found\n- 'resolution_policy': chosen policy (freshness/authority/consensus)\n- 'final_price': resolved price\n- 'audit_trail': detailed reasoning",
+  "name": "Data Consistency and Arbitration",
+  "description": "Handle conflicting outputs from multiple data sources and adjudicate with clear reasoning",
+  "system_prompt": "You are a data integrity specialist. Your task is to ensure data consistency across multiple enterprise systems. When you find conflicting information from different sources (e.g., pricing API vs. catalog database), you must analyze the discrepancy, apply an appropriate arbitration policy—such as data freshness or source authority—and provide a single, verified value along with your reasoning.",
+  "user_prompt": "I'm getting different price reports for product 'PROD-123'. Can you check all our pricing systems, identify where the conflicts are, and tell me what the correct price should be? Please explain why you chose that specific price.",
   "time_limit_seconds": 300,
   "required_agents": [
     "data_collector",
@@ -17,3 +17,4 @@
     "traceability": "Complete audit trail of decision process"
   }
 }
+

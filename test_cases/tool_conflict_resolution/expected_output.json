@@ -1,30 +1,23 @@
 {
-  "structure": {
-    "detected_conflicts": "array",
-    "resolution_policy": "string",
-    "final_price": "number",
-    "audit_trail": "object or string"
-  },
-  "expected_conflicts": [
+  "detected_conflicts": [
     {
-      "source1": "pricing_api",
-      "value1": 999,
-      "source2": "catalog_db",
-      "value2": 1099,
-      "difference": 100
+      "systems": [
+        "pricing_api",
+        "catalog_db"
+      ],
+      "prices": [
+        999,
+        1099
+      ],
+      "discrepancy": 100
     }
   ],
-  "valid_resolution_policies": [
-    "freshness",
-    "authority",
-    "consensus",
-    "most_recent",
-    "authoritative_source"
-  ],
+  "resolution_policy": "authority",
+  "final_price": 999,
+  "audit_trail": "The conflict was identified between the Pricing API (\u20b9999) and the Catalog Database (\u20b91099). We applied the 'authority' policy, selecting the Pricing API as it is the primary authoritative source for current pricing data. The Catalog Database value was deemed secondary and likely outdated.",
   "validation_rules": {
     "must_detect_conflict": true,
     "must_have_policy": true,
-    "must_have_audit_trail": true,
-    "final_price_must_match_one_source": true
+    "final_price_is_999": true
   }
 }

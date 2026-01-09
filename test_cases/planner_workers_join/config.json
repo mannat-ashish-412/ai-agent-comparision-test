@@ -1,14 +1,19 @@
 {
-  "name": "Planner-Workers-Join Pattern",
-  "description": "Decompose task, execute in parallel, merge results consistently",
-  "system_prompt": "You are a multi-agent system for complex planning tasks.\n\nWorkflow:\n1. Planner Agent: Decompose the task into 3 independent subtasks\n2. Worker Agents: Execute each subtask in parallel\n3. Joiner Agent: Merge results into one consistent plan\n4. Validator Agent: Check for contradictions\n\nThe final plan must be internally consistent with no contradictions between subtask outputs.",
-  "user_prompt": "Create a migration plan from MongoDB to DynamoDB for the provided schema.\n\nDecompose into exactly 3 subtasks:\n1. Data modeling (schema conversion)\n2. Access patterns (query optimization)\n3. Migration steps (execution plan)\n\nOutput JSON with:\n- 'subtasks': array of 3 subtask definitions\n- 'subtask_results': array of 3 results\n- 'merged_plan': unified migration plan\n- 'consistency_check': validation results",
+  "name": "Database Migration Planning",
+  "description": "Create a unified migration plan from MongoDB to DynamoDB",
+  "system_prompt": "You are a cloud architect expert in database migrations. Your goal is to guide a team of engineers in planning a zero-downtime migration from MongoDB to DynamoDB. You must coordinate different specializations (data modeling, access patterns, migration steps) and consolidate their technical findings into a single, cohesive migration document.",
+  "user_prompt": "We need to migrate our e-commerce platform's database from MongoDB to DynamoDB. Can you coordinate the research for data modeling, access patterns, and the actual migration steps, then provide a unified architectural plan? Ensure all technical recommendations are consistent across the different areas.",
   "time_limit_seconds": 300,
-  "required_agents": ["planner", "worker", "joiner", "validator"],
+  "required_agents": [
+    "planner",
+    "worker_modeler",
+    "worker_access",
+    "worker_migrator"
+  ],
   "evaluation_criteria": {
-    "correctness": "3 subtasks defined and executed, merged plan complete",
-    "consistency": "No contradictions in merged plan",
-    "conflict_handling": "Conflicts between subtasks resolved",
-    "traceability": "Can trace each section to source subtask"
+    "correctness": "Unified plan includes all 3 focus areas with correct details",
+    "consistency": "Recommendations across areas are compatible",
+    "conflict_handling": "Any potential mismatches between modeling and access patterns resolved",
+    "traceability": "Plan can be traced to specific specialist findings"
   }
 }

@@ -1,8 +1,8 @@
 {
   "name": "Parallel Document Triage",
   "description": "Process 10 bug reports/feature requests in parallel, classify, deduplicate, and assign severity",
-  "system_prompt": "You are a multi-agent system designed to triage and classify incoming issues efficiently.\n\nYour workflow should:\n1. Use parallel classifier agents to categorize each item (bug/feature/question)\n2. Use a deduplication agent to identify and merge duplicate items\n3. Use a severity assessment agent to assign priority levels\n4. Use a QA reviewer agent to validate consistency and completeness\n\nFor each item, you must produce:\n- Classification (bug/feature/question)\n- Severity (critical/high/medium/low)\n- One-line next action\n- Deduplication notes (which items were merged, if any)\n\nEnsure traceability: track which agent made which decision.",
-  "user_prompt": "Process the following 10 issue reports. Classify each, identify duplicates, assign severity, and provide next actions.\n\nInput data is provided in input_data.json.\n\nYour final output must be a JSON object with:\n- 'processed_items': array of unique items after deduplication\n- 'duplicates_merged': array showing which items were merged\n- 'agent_trace': object showing which agent processed each step",
+  "system_prompt": "You are a lead support engineer. Your task is to triage a batch of incoming issues. For each issue, you must classify it, assess its severity, and suggest the next action. Additionally, you must identify any duplicate issues in the batch so they can be merged.",
+  "user_prompt": "I have 10 new issues that just came in. Can you triage them for me? I need a classification (bug/feature/question), severity (critical/high/medium/low), and a recommended next action for each. Also, please check if any of these are duplicates of each other.",
   "time_limit_seconds": 300,
   "required_agents": [
     "classifier",

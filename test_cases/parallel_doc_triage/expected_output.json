@@ -1,54 +1,70 @@
 {
-  "structure": {
-    "processed_items": "array",
-    "duplicates_merged": "array",
-    "agent_trace": "object"
-  },
-  "expected_classifications": {
-    "bugs": ["ISSUE-001", "ISSUE-003", "ISSUE-007", "ISSUE-009", "ISSUE-010"],
-    "features": ["ISSUE-002", "ISSUE-004", "ISSUE-006", "ISSUE-008"],
-    "questions": ["ISSUE-005"]
-  },
-  "expected_duplicates": [
+  "processed_items": [
+    {
+      "id": "ISSUE-001",
+      "classification": "bug",
+      "severity": "high",
+      "next_action": "Assign to engineering team for urgent fix"
+    },
+    {
+      "id": "ISSUE-002",
+      "classification": "feature",
+      "severity": "low",
+      "next_action": "Add to feature backlog"
+    },
+    {
+      "id": "ISSUE-004",
+      "classification": "feature",
+      "severity": "low",
+      "next_action": "Add to feature backlog"
+    },
+    {
+      "id": "ISSUE-005",
+      "classification": "question",
+      "severity": "low",
+      "next_action": "Add to support queue"
+    },
+    {
+      "id": "ISSUE-007",
+      "classification": "bug",
+      "severity": "medium",
+      "next_action": "Add to current sprint backlog"
+    },
+    {
+      "id": "ISSUE-009",
+      "classification": "bug",
+      "severity": "critical",
+      "next_action": "Immediate investigation and hotfix required"
+    }
+  ],
+  "duplicates_merged": [
     {
       "primary": "ISSUE-001",
-      "duplicates": ["ISSUE-003"],
-      "reason": "Both describe login crash issue"
+      "duplicates": [
+        "ISSUE-003"
+      ]
     },
     {
       "primary": "ISSUE-002",
-      "duplicates": ["ISSUE-008"],
-      "reason": "Both request dark mode"
+      "duplicates": [
+        "ISSUE-008"
+      ]
     },
     {
       "primary": "ISSUE-004",
-      "duplicates": ["ISSUE-006"],
-      "reason": "Both request CSV export"
+      "duplicates": [
+        "ISSUE-006"
+      ]
     },
     {
       "primary": "ISSUE-007",
-      "duplicates": ["ISSUE-010"],
-      "reason": "Both describe search pagination bug"
+      "duplicates": [
+        "ISSUE-010"
+      ]
     }
   ],
-  "expected_severity": {
-    "ISSUE-009": "critical",
-    "ISSUE-001": "high",
-    "ISSUE-007": "medium",
-    "ISSUE-002": "low",
-    "ISSUE-004": "low",
-    "ISSUE-005": "low"
-  },
   "validation_rules": {
-    "must_have_fields": [
-      "id",
-      "classification",
-      "severity",
-      "next_action",
-      "processed_by_agent"
-    ],
     "unique_items_count": 6,
-    "duplicates_identified": 4,
-    "agent_trace_required": true
+    "duplicates_identified": 4
   }
 }

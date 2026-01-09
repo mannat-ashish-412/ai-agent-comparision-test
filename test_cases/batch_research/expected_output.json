@@ -1,16 +1,19 @@
 {
-  "structure": {
-    "answers": "array",
-    "citations": "object or array",
-    "synthesis": "string"
-  },
-  "expected_citations": {
+  "answers": [
+    "Employees may work remotely up to 3 days per week with manager approval.",
+    "Full-time employees receive 15 vacation days per year.",
+    "Submit requests through HR portal at least 2 weeks in advance.",
+    "Q4 (Oct-Dec) requires director-level approval for vacation.",
+    "Up to 5 unused days roll over to next year, must be used in Q1."
+  ],
+  "citations": {
     "question_0": "KB-001",
     "question_1": "KB-002",
     "question_2": "KB-003",
     "question_3": "KB-004",
     "question_4": "KB-005"
   },
+  "synthesis": "The company offers a flexible remote work policy (up to 3 days/week) and 15 days of annual vacation. Requests should be submitted 2 weeks in advance via the HR portal. Special director-level approval is needed for Q4 vacations, and up to 5 unused days can roll over to Q1 of the following year.",
   "validation_rules": {
     "answers_count": 5,
     "all_answers_have_citations": true,

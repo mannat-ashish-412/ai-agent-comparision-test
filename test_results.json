@@ -1,0 +1,42 @@
+{
+    "result": [
+        [
+            "batch_research",
+            false
+        ],
+        [
+            "context_compression",
+            {
+                "correctness": 100.0,
+                "consistency": 90,
+                "conflict_handling": 85,
+                "traceability": 90,
+                "passed": true
+            }
+        ],
+        [
+            "extraction_audit",
+            false
+        ],
+        [
+            "parallel_doc_triage",
+            false
+        ],
+        [
+            "planner_workers_join",
+            false
+        ],
+        [
+            "rca_fix_test",
+            false
+        ],
+        [
+            "safe_ops_approval",
+            false
+        ],
+        [
+            "tool_conflict_resolution",
+            false
+        ]
+    ]
+}

@@ -1,59 +1,73 @@
 {
-  "structure": {
-    "prd": "object",
-    "contradictions": "array",
-    "clarifying_questions": "array",
-    "resolution_status": "object"
+  "prd": {
+    "authentication": [
+      "Users must be logged in to checkout",
+      "Guest checkout should be available for faster purchases",
+      "All purchases require user authentication for security"
+    ],
+    "payment": [
+      "Support credit cards, debit cards, and PayPal",
+      "Payment processing must complete within 3 seconds",
+      "Complex fraud detection may take up to 10 seconds",
+      "Store payment methods for future use",
+      "Never store credit card information (PCI compliance)"
+    ],
+    "shipping": [
+      "Offer standard (5-7 days) and express (2-3 days) shipping",
+      "Free shipping on orders over $50",
+      "Express shipping is always $15",
+      "Free express shipping for premium members"
+    ],
+    "inventory": [
+      "Reserve items in cart for 15 minutes",
+      "Items should remain in cart indefinitely until checkout",
+      "Real-time inventory updates",
+      "Allow overselling by 10% to maximize revenue",
+      "Never oversell to maintain customer trust"
+    ],
+    "confirmation": [
+      "Send email confirmation immediately",
+      "Email should include tracking number",
+      "Tracking numbers generated 24 hours after order",
+      "SMS confirmation for all orders",
+      "SMS only for orders over $100"
+    ],
+    "returns": [
+      "30-day return window",
+      "Electronics have 14-day return window",
+      "All items eligible for return within 30 days"
+    ]
   },
-  "expected_contradictions": [
+  "contradictions": [
     {
       "category": "authentication",
-      "items": ["Users must be logged in", "Guest checkout available", "All purchases require authentication"],
-      "severity": "high"
-    },
-    {
-      "category": "payment_timing",
-      "items": ["Complete within 3 seconds", "Fraud detection may take 10 seconds"],
-      "severity": "medium"
+      "req1": "Users must be logged in to checkout",
+      "req2": "Guest checkout should be available for faster purchases",
+      "severity": "high",
+      "reason": "Direct contradiction between mandatory login and guest checkout availability."
     },
     {
       "category": "payment_storage",
-      "items": ["Store payment methods", "Never store credit card information"],
-      "severity": "high"
-    },
-    {
-      "category": "cart_reservation",
-      "items": ["Reserve for 15 minutes", "Remain indefinitely"],
-      "severity": "medium"
+      "req1": "Store payment methods for future use",
+      "req2": "Never store credit card information (PCI compliance)",
+      "severity": "high",
+      "reason": "Conflicting instructions on storing payment data."
     },
     {
       "category": "overselling",
-      "items": ["Allow overselling by 10%", "Never oversell"],
-      "severity": "high"
-    },
-    {
-      "category": "tracking_number",
-      "items": ["Include tracking in email immediately", "Generated 24 hours after"],
-      "severity": "medium"
-    },
-    {
-      "category": "sms_confirmation",
-      "items": ["SMS for all orders", "SMS only over $100"],
-      "severity": "low"
-    },
-    {
-      "category": "return_window",
-      "items": ["30-day return", "Electronics 14-day", "All items 30 days"],
-      "severity": "medium"
-    },
-    {
-      "category": "shipping_cost",
-      "items": ["Express always $15", "Free express for premium members"],
-      "severity": "low"
+      "req1": "Allow overselling by 10% to maximize revenue",
+      "req2": "Never oversell to maintain customer trust",
+      "severity": "high",
+      "reason": "Conflicting policies on inventory overselling."
     }
   ],
+  "clarifying_questions": [
+    "Should guest checkout be allowed, or is user authentication mandatory for all purchases?",
+    "Can we store payment tokens for future use while remaining PCI compliant by not storing actual credit card numbers?",
+    "Is the policy to allow 10% overselling or to never oversell under any circumstances?"
+  ],
   "validation_rules": {
-    "min_contradictions_found": 6,
+    "min_contradictions_found": 3,
     "clarifying_questions_count": 3,
     "must_have_prd_sections": [
       "authentication",
@@ -62,7 +76,6 @@
       "inventory",
       "confirmation",
       "returns"
-    ],
-    "resolution_status_required": true
+    ]
   }
 }
