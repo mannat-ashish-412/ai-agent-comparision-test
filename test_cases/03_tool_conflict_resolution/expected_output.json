@@ -1,0 +1,30 @@
+{
+  "structure": {
+    "detected_conflicts": "array",
+    "resolution_policy": "string",
+    "final_price": "number",
+    "audit_trail": "object or string"
+  },
+  "expected_conflicts": [
+    {
+      "source1": "pricing_api",
+      "value1": 999,
+      "source2": "catalog_db",
+      "value2": 1099,
+      "difference": 100
+    }
+  ],
+  "valid_resolution_policies": [
+    "freshness",
+    "authority",
+    "consensus",
+    "most_recent",
+    "authoritative_source"
+  ],
+  "validation_rules": {
+    "must_detect_conflict": true,
+    "must_have_policy": true,
+    "must_have_audit_trail": true,
+    "final_price_must_match_one_source": true
+  }
+}

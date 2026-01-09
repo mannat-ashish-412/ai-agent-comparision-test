@@ -1,0 +1,19 @@
+{
+  "structure": {
+    "compressed_state": "string or object",
+    "key_facts": "array or object",
+    "final_answer": "string",
+    "sources": "array"
+  },
+  "expected_answer": {
+    "database": "RDS PostgreSQL",
+    "instance_type": "db.t3.medium",
+    "multi_az": true
+  },
+  "validation_rules": {
+    "must_mention_rds": true,
+    "must_mention_instance_type": true,
+    "should_not_mention_self_managed": true,
+    "must_have_compressed_state": true
+  }
+}

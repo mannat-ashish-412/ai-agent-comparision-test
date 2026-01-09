@@ -1,0 +1,19 @@
+{
+  "structure": {
+    "subtasks": "array",
+    "subtask_results": "array",
+    "merged_plan": "object",
+    "consistency_check": "object"
+  },
+  "expected_subtasks": [
+    "data_modeling",
+    "access_patterns",
+    "migration_steps"
+  ],
+  "validation_rules": {
+    "subtask_count": 3,
+    "all_subtasks_completed": true,
+    "merged_plan_sections": ["data_model", "access_patterns", "migration_steps"],
+    "no_contradictions": true
+  }
+}

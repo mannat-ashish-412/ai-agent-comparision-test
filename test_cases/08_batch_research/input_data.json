@@ -1,0 +1,31 @@
+{
+  "questions": [
+    "What is the company's remote work policy?",
+    "How many vacation days do employees get?",
+    "What is the process for requesting time off?",
+    "Are there any blackout dates for vacation?",
+    "What happens to unused vacation days?"
+  ],
+  "knowledge_base": [
+    {
+      "id": "KB-001",
+      "content": "Company Remote Work Policy: Employees may work remotely up to 3 days per week. Managers must approve remote work schedules in advance."
+    },
+    {
+      "id": "KB-002",
+      "content": "Vacation Policy: Full-time employees receive 15 vacation days per year. Part-time employees receive pro-rated vacation based on hours worked."
+    },
+    {
+      "id": "KB-003",
+      "content": "Time Off Requests: Submit requests through the HR portal at least 2 weeks in advance. Manager approval required within 3 business days."
+    },
+    {
+      "id": "KB-004",
+      "content": "Blackout Dates: Vacation requests during Q4 (Oct-Dec) require director-level approval due to high business volume. No complete team vacations during this period."
+    },
+    {
+      "id": "KB-005",
+      "content": "Vacation Rollover: Up to 5 unused vacation days may roll over to the next year. Days beyond 5 are forfeited. Rollover days must be used within Q1."
+    }
+  ]
+}

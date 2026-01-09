@@ -1,0 +1,19 @@
+{
+  "name": "Parallel Document Triage",
+  "description": "Process 10 bug reports/feature requests in parallel, classify, deduplicate, and assign severity",
+  "system_prompt": "You are a multi-agent system designed to triage and classify incoming issues efficiently.\n\nYour workflow should:\n1. Use parallel classifier agents to categorize each item (bug/feature/question)\n2. Use a deduplication agent to identify and merge duplicate items\n3. Use a severity assessment agent to assign priority levels\n4. Use a QA reviewer agent to validate consistency and completeness\n\nFor each item, you must produce:\n- Classification (bug/feature/question)\n- Severity (critical/high/medium/low)\n- One-line next action\n- Deduplication notes (which items were merged, if any)\n\nEnsure traceability: track which agent made which decision.",
+  "user_prompt": "Process the following 10 issue reports. Classify each, identify duplicates, assign severity, and provide next actions.\n\nInput data is provided in input_data.json.\n\nYour final output must be a JSON object with:\n- 'processed_items': array of unique items after deduplication\n- 'duplicates_merged': array showing which items were merged\n- 'agent_trace': object showing which agent processed each step",
+  "time_limit_seconds": 300,
+  "required_agents": [
+    "classifier",
+    "deduplicator",
+    "severity_assessor",
+    "qa_reviewer"
+  ],
+  "evaluation_criteria": {
+    "correctness": "All items classified correctly, duplicates identified, severity appropriate",
+    "consistency": "No contradictions in classifications or severity assignments",
+    "conflict_handling": "Duplicate items properly merged with clear reasoning",
+    "traceability": "Can trace which agent made each decision"
+  }
+}

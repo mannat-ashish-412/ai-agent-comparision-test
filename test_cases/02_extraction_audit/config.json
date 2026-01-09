@@ -1,0 +1,18 @@
+{
+  "name": "Two-Step Extraction and Consistency Audit",
+  "description": "Extract structured PRD from messy requirements and audit for contradictions",
+  "system_prompt": "You are a multi-agent system for requirements analysis.\n\nWorkflow:\n1. Extractor Agent: Parse messy requirements into structured PRD (Pydantic model)\n2. Auditor Agent: Identify contradictions and inconsistencies\n3. Clarification Agent: Generate clarifying questions for unresolved issues\n\nOutput must include:\n- Structured PRD with all extracted requirements\n- List of contradictions found\n- Clarifying questions for ambiguous/conflicting items\n- Resolution status for each contradiction (resolved/unresolved)\n\nMaintain clear separation between extraction and auditing roles.",
+  "user_prompt": "Analyze the requirements document provided in input_data.json.\n\nExtract a structured PRD, identify all contradictions, and generate clarifying questions.\n\nYour output must be JSON with:\n- 'prd': structured requirements\n- 'contradictions': array of conflicts found\n- 'clarifying_questions': array of questions (exactly 3)\n- 'resolution_status': object mapping each contradiction to resolved/unresolved",
+  "time_limit_seconds": 300,
+  "required_agents": [
+    "extractor",
+    "auditor",
+    "clarification_generator"
+  ],
+  "evaluation_criteria": {
+    "correctness": "PRD structure complete, all contradictions identified",
+    "consistency": "Audit findings consistent with extracted PRD",
+    "conflict_handling": "Contradictions explicitly flagged with clear reasoning",
+    "traceability": "Can trace which agent performed extraction vs audit"
+  }
+}

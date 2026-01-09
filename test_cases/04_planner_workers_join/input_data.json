@@ -1,0 +1,48 @@
+{
+  "schema": {
+    "database": "ecommerce",
+    "collections": [
+      {
+        "name": "users",
+        "fields": {
+          "_id": "ObjectId",
+          "email": "string",
+          "name": "string",
+          "created_at": "datetime",
+          "preferences": "object"
+        },
+        "indexes": ["email"]
+      },
+      {
+        "name": "orders",
+        "fields": {
+          "_id": "ObjectId",
+          "user_id": "ObjectId",
+          "items": "array",
+          "total": "decimal",
+          "status": "string",
+          "created_at": "datetime"
+        },
+        "indexes": ["user_id", "status"]
+      },
+      {
+        "name": "products",
+        "fields": {
+          "_id": "ObjectId",
+          "sku": "string",
+          "name": "string",
+          "price": "decimal",
+          "inventory": "number"
+        },
+        "indexes": ["sku"]
+      }
+    ]
+  },
+  "access_patterns": [
+    "Get user by email",
+    "Get all orders for a user",
+    "Get order by ID",
+    "Get product by SKU",
+    "Update inventory"
+  ]
+}

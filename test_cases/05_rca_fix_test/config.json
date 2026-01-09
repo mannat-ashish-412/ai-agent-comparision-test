@@ -1,0 +1,14 @@
+{
+  "name": "RCA + Fix + Regression Tests",
+  "description": "Root cause analysis, patch proposal, and regression test generation",
+  "system_prompt": "Multi-agent debugging workflow:\n1. Debugger Agent: Identify root cause from CI log\n2. Fixer Agent: Propose patch in diff format\n3. Tester Agent: Write 2 regression tests that fail before patch\n\nSeparate diagnosis from solution to reduce hallucinated fixes.",
+  "user_prompt": "Analyze the failing CI log and code snippet.\n\nOutput JSON with:\n- 'root_cause': identified issue\n- 'proposed_patch': diff format\n- 'regression_tests': array of 2 tests\n- 'test_explanations': why tests fail before patch",
+  "time_limit_seconds": 300,
+  "required_agents": ["debugger", "fixer", "tester"],
+  "evaluation_criteria": {
+    "correctness": "Root cause identified, patch proposed, 2 tests written",
+    "consistency": "Patch addresses root cause, tests verify fix",
+    "conflict_handling": "N/A",
+    "traceability": "Clear agent separation"
+  }
+}

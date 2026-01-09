@@ -1,0 +1,68 @@
+{
+  "structure": {
+    "prd": "object",
+    "contradictions": "array",
+    "clarifying_questions": "array",
+    "resolution_status": "object"
+  },
+  "expected_contradictions": [
+    {
+      "category": "authentication",
+      "items": ["Users must be logged in", "Guest checkout available", "All purchases require authentication"],
+      "severity": "high"
+    },
+    {
+      "category": "payment_timing",
+      "items": ["Complete within 3 seconds", "Fraud detection may take 10 seconds"],
+      "severity": "medium"
+    },
+    {
+      "category": "payment_storage",
+      "items": ["Store payment methods", "Never store credit card information"],
+      "severity": "high"
+    },
+    {
+      "category": "cart_reservation",
+      "items": ["Reserve for 15 minutes", "Remain indefinitely"],
+      "severity": "medium"
+    },
+    {
+      "category": "overselling",
+      "items": ["Allow overselling by 10%", "Never oversell"],
+      "severity": "high"
+    },
+    {
+      "category": "tracking_number",
+      "items": ["Include tracking in email immediately", "Generated 24 hours after"],
+      "severity": "medium"
+    },
+    {
+      "category": "sms_confirmation",
+      "items": ["SMS for all orders", "SMS only over $100"],
+      "severity": "low"
+    },
+    {
+      "category": "return_window",
+      "items": ["30-day return", "Electronics 14-day", "All items 30 days"],
+      "severity": "medium"
+    },
+    {
+      "category": "shipping_cost",
+      "items": ["Express always $15", "Free express for premium members"],
+      "severity": "low"
+    }
+  ],
+  "validation_rules": {
+    "min_contradictions_found": 6,
+    "clarifying_questions_count": 3,
+    "must_have_prd_sections": [
+      "authentication",
+      "payment",
+      "shipping",
+      "inventory",
+      "confirmation",
+      "returns"
+    ],
+    "resolution_status_required": true
+  }
+}

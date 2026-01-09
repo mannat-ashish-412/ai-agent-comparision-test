@@ -1,0 +1,54 @@
+{
+  "structure": {
+    "processed_items": "array",
+    "duplicates_merged": "array",
+    "agent_trace": "object"
+  },
+  "expected_classifications": {
+    "bugs": ["ISSUE-001", "ISSUE-003", "ISSUE-007", "ISSUE-009", "ISSUE-010"],
+    "features": ["ISSUE-002", "ISSUE-004", "ISSUE-006", "ISSUE-008"],
+    "questions": ["ISSUE-005"]
+  },
+  "expected_duplicates": [
+    {
+      "primary": "ISSUE-001",
+      "duplicates": ["ISSUE-003"],
+      "reason": "Both describe login crash issue"
+    },
+    {
+      "primary": "ISSUE-002",
+      "duplicates": ["ISSUE-008"],
+      "reason": "Both request dark mode"
+    },
+    {
+      "primary": "ISSUE-004",
+      "duplicates": ["ISSUE-006"],
+      "reason": "Both request CSV export"
+    },
+    {
+      "primary": "ISSUE-007",
+      "duplicates": ["ISSUE-010"],
+      "reason": "Both describe search pagination bug"
+    }
+  ],
+  "expected_severity": {
+    "ISSUE-009": "critical",
+    "ISSUE-001": "high",
+    "ISSUE-007": "medium",
+    "ISSUE-002": "low",
+    "ISSUE-004": "low",
+    "ISSUE-005": "low"
+  },
+  "validation_rules": {
+    "must_have_fields": [
+      "id",
+      "classification",
+      "severity",
+      "next_action",
+      "processed_by_agent"
+    ],
+    "unique_items_count": 6,
+    "duplicates_identified": 4,
+    "agent_trace_required": true
+  }
+}

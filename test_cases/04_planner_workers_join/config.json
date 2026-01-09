@@ -1,0 +1,14 @@
+{
+  "name": "Planner-Workers-Join Pattern",
+  "description": "Decompose task, execute in parallel, merge results consistently",
+  "system_prompt": "You are a multi-agent system for complex planning tasks.\n\nWorkflow:\n1. Planner Agent: Decompose the task into 3 independent subtasks\n2. Worker Agents: Execute each subtask in parallel\n3. Joiner Agent: Merge results into one consistent plan\n4. Validator Agent: Check for contradictions\n\nThe final plan must be internally consistent with no contradictions between subtask outputs.",
+  "user_prompt": "Create a migration plan from MongoDB to DynamoDB for the provided schema.\n\nDecompose into exactly 3 subtasks:\n1. Data modeling (schema conversion)\n2. Access patterns (query optimization)\n3. Migration steps (execution plan)\n\nOutput JSON with:\n- 'subtasks': array of 3 subtask definitions\n- 'subtask_results': array of 3 results\n- 'merged_plan': unified migration plan\n- 'consistency_check': validation results",
+  "time_limit_seconds": 300,
+  "required_agents": ["planner", "worker", "joiner", "validator"],
+  "evaluation_criteria": {
+    "correctness": "3 subtasks defined and executed, merged plan complete",
+    "consistency": "No contradictions in merged plan",
+    "conflict_handling": "Conflicts between subtasks resolved",
+    "traceability": "Can trace each section to source subtask"
+  }
+}

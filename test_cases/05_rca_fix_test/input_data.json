@@ -1,0 +1,4 @@
+{
+  "ci_log": "FAILED tests/test_auth.py::test_login_with_special_chars\nAssertionError: Expected 200, got 400\nInput: email='user+test@example.com'\nError: Invalid email format\n\nStack trace:\n  File auth.py, line 45, in validate_email\n    if '@' not in email or '.' not in email:\n      return False\n  File auth.py, line 52, in login\n    if not validate_email(email):\n      raise ValueError('Invalid email')",
+  "code_snippet": "def validate_email(email):\n    if '@' not in email or '.' not in email:\n        return False\n    if '+' in email:\n        return False  # Bug: rejects valid emails with +\n    return True\n\ndef login(email, password):\n    if not validate_email(email):\n        raise ValueError('Invalid email format')\n    # ... rest of login logic"
+}

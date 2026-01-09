@@ -1,0 +1,7 @@
+pydantic-ai
+pydantic
+pydantic-graph
+python-dotenv
+logfire
+httpx
+aiohttp

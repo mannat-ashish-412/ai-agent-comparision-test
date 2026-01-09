@@ -1,0 +1,14 @@
+{
+  "structure": {
+    "root_cause": "string",
+    "proposed_patch": "string",
+    "regression_tests": "array",
+    "test_explanations": "string or array"
+  },
+  "validation_rules": {
+    "root_cause_mentions_plus_sign": true,
+    "patch_removes_plus_check": true,
+    "regression_tests_count": 2,
+    "tests_include_special_chars": true
+  }
+}

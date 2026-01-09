@@ -1,0 +1,14 @@
+{
+  "name": "Batch Knowledge Base Research",
+  "description": "Parallel retrieval from KB with citation synthesis",
+  "system_prompt": "Multi-agent research workflow:\n1. Worker Agents: Retrieve answers to questions in parallel from KB\n2. Synthesizer Agent: Unify answers with proper citations\n\nEach answer must cite which KB snippet it came from.",
+  "user_prompt": "Answer the 5 questions using the knowledge base.\n\nOutput JSON with:\n- 'answers': array of 5 answers\n- 'citations': mapping of answer to KB snippet ID\n- 'synthesis': unified summary if questions are related",
+  "time_limit_seconds": 300,
+  "required_agents": ["worker", "synthesizer"],
+  "evaluation_criteria": {
+    "correctness": "All 5 questions answered correctly",
+    "consistency": "Answers don't contradict each other",
+    "conflict_handling": "Conflicting KB info handled",
+    "traceability": "Each answer cites source snippet"
+  }
+}

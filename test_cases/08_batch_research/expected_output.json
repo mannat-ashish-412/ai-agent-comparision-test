@@ -1,0 +1,19 @@
+{
+  "structure": {
+    "answers": "array",
+    "citations": "object or array",
+    "synthesis": "string"
+  },
+  "expected_citations": {
+    "question_0": "KB-001",
+    "question_1": "KB-002",
+    "question_2": "KB-003",
+    "question_3": "KB-004",
+    "question_4": "KB-005"
+  },
+  "validation_rules": {
+    "answers_count": 5,
+    "all_answers_have_citations": true,
+    "citations_match_kb_ids": true
+  }
+}
