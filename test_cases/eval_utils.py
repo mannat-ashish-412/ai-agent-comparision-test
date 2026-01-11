@@ -46,8 +46,12 @@ async def run_llm_judges(
             val = getattr(value_attr, "value", value_attr)
 
             if isinstance(val, (int, float)):
-                # LLM Judge score is typically 0.0 to 1.0, scale to 0-100
-                scores[name] = float(val) * 100
+                f_val = float(val)
+                # Some models return 0-100, others return 0-1
+                if f_val > 1.0:
+                    scores[name] = min(f_val, 100.0)
+                else:
+                    scores[name] = f_val * 100
             elif isinstance(val, bool):
                 scores[name] = 100.0 if val else 0.0
             else:

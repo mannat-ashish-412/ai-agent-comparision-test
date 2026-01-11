@@ -133,8 +133,7 @@ class TestRunner:
         outputs_dir = Path(__file__).parent.parent / "outputs"
         outputs_dir.mkdir(exist_ok=True)
 
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"{test_name}_output_{timestamp}.json"
+        filename = f"{test_name}_output.json"
 
         output_data = {
             "test_name": test_name,

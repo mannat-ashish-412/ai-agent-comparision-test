@@ -14,7 +14,7 @@ class ConsistencyCheck(BaseModel):
     )
 
 
-class DatabaseMigrationPlan(BaseModel):
+class DatabaseMigrationPlanOutput(BaseModel):
     """Unified architectural plan for database migration."""
 
     unified_plan: str = Field(
