@@ -24,7 +24,7 @@ async def main(system_prompt, user_prompt, tools, output_type):
 
         async with agent.iter(
             user_prompt,
-            usage_limits=UsageLimits(request_limit=200),
+            usage_limits=UsageLimits(request_limit=50),
         ) as agent_run:
             async for event in agent_run:
                 # print("[ EVENT ] \n")

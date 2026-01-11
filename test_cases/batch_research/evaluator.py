@@ -1,63 +1,37 @@
-"""Evaluator for batch research test."""
+"""Evaluator for batch research test using LLMJudge."""
 from typing import Dict, Any
+from eval_utils import run_llm_judges
 
 
-def evaluate(actual_output: Any, expected_output: Dict[str, Any]) -> Dict[str, float]:
-    scores = {
-        "correctness": 0.0,
-        "consistency": 0.0,
-        "conflict_handling": 70.0,
-        "traceability": 0.0,
-    }
-    if not isinstance(actual_output, dict):
-        scores["passed"] = False
-        return scores
+async def evaluate(
+    actual_output: Any, expected_output: Dict[str, Any]
+) -> Dict[str, Any]:
+    rubrics = [
+        (
+            "correctness",
+            "Score the correctness of the research answers. Give 100 for 5 correct answers, 60 for 3-4, 30 for 1-2, and 0 for none.",
+        ),
+        (
+            "consistency",
+            "Check for internal consistency in the answers. 100 if there are no contradictions, lower if contradictions exist.",
+        ),
+        (
+            "conflict_handling",
+            "Evaluate how well the agent handled conflicting information in the research materials.",
+        ),
+        (
+            "traceability",
+            "Evaluate traceability. Score 100 if all 5 answers cite KB sources (format kb-XXX), 70 for 3-4 citations, 40 for 1-2, and 0 for none.",
+        ),
+    ]
 
-    # Correctness
-    if "answers" in actual_output:
-        answers = actual_output["answers"]
-        if len(answers) == 5:
-            scores["correctness"] = 100
-        elif len(answers) >= 3:
-            scores["correctness"] = 60
-        elif len(answers) > 0:
-            scores["correctness"] = 30
-
-    # Consistency
-    if "answers" in actual_output:
-        # Check for contradictions
-        # answers_str = str(actual_output["answers"]).lower()
-        # Simple check: no obvious contradictions
-        scores["consistency"] = 85
-
-    # Traceability
-    if "citations" in actual_output:
-        citations = actual_output["citations"]
-
-        # Check if citations reference KB IDs
-        citations_str = str(citations).lower()
-        kb_id_count = citations_str.count("kb-")
-
-        if kb_id_count >= 5:
-            scores["traceability"] = 100
-        elif kb_id_count >= 3:
-            scores["traceability"] = 70
-        elif kb_id_count > 0:
-            scores["traceability"] = 40
+    scores = await run_llm_judges(actual_output, expected_output, rubrics)
 
     # Pass criteria: All scores ≥ 70, all 5 answers must cite KB source
-    scores["passed"] = (
-        all(
-            score >= 70
-            for score in [
-                scores["correctness"],
-                scores["consistency"],
-                scores["conflict_handling"],
-                scores["traceability"],
-            ]
-        )
-        and len(actual_output.get("answers", [])) == 5
-        and str(actual_output.get("citations", "")).lower().count("kb-") >= 5
+    # We still keep some hard checks if necessary, or let the LLM handle it.
+    scores["passed"] = all(
+        scores.get(k, 0) >= 70
+        for k in ["correctness", "consistency", "conflict_handling", "traceability"]
     )
 
     return scores

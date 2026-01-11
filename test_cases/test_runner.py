@@ -1,5 +1,6 @@
 import json
 import importlib.util
+import inspect
 from pathlib import Path
 import traceback
 from typing import Any, List
@@ -24,6 +25,11 @@ class TestRunner:
 
     def _load_test_data(self, test_name: str):
         """Load all test data for a test case."""
+        import sys
+
+        if str(self.test_dir) not in sys.path:
+            sys.path.append(str(self.test_dir))
+
         test_path = self.test_dir / test_name
 
         with open(test_path / "config.json") as f:
@@ -114,7 +120,11 @@ class TestRunner:
         if result:
             # Save agent output to outputs folder
             self._save_output(test_name, result)
-            return evaluate(result.dict(), expected)
+
+            if inspect.iscoroutinefunction(evaluate):
+                return await evaluate(result.dict(), expected)
+            else:
+                return evaluate(result.dict(), expected)
         else:
             return False
 

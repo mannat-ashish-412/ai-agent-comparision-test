@@ -2,25 +2,47 @@
     "result": [
         [
             "batch_research",
-            false
+            {
+                "correctness": 10000.0,
+                "LLMJudge_pass": 100.0,
+                "consistency": 10000.0,
+                "conflict_handling": 40.0,
+                "traceability": 10000.0,
+                "passed": false
+            }
         ],
         [
             "context_compression",
             {
-                "correctness": 100.0,
-                "consistency": 90,
-                "conflict_handling": 85,
-                "traceability": 90,
+                "correctness": 10000.0,
+                "LLMJudge_pass": 100.0,
+                "consistency": 100.0,
+                "conflict_handling": 10000.0,
+                "traceability": 10000.0,
                 "passed": true
             }
         ],
         [
             "extraction_audit",
-            false
+            {
+                "correctness": 0.0,
+                "LLMJudge_pass": 0.0,
+                "consistency": 10000.0,
+                "conflict_handling": 8500.0,
+                "traceability": 4000.0,
+                "passed": false
+            }
         ],
         [
             "parallel_doc_triage",
-            false
+            {
+                "correctness": 0.0,
+                "LLMJudge_pass": 0.0,
+                "consistency": 90.0,
+                "conflict_handling": 0.0,
+                "traceability": 0.0,
+                "passed": false
+            }
         ],
         [
             "planner_workers_join",
@@ -28,15 +50,36 @@
         ],
         [
             "rca_fix_test",
-            false
+            {
+                "correctness": 100.0,
+                "LLMJudge_pass": 0.0,
+                "consistency": 0.0,
+                "conflict_handling": 0.0,
+                "traceability": 0.0,
+                "passed": false
+            }
         ],
         [
             "safe_ops_approval",
-            false
+            {
+                "correctness": 10000.0,
+                "LLMJudge_pass": 0.0,
+                "consistency": 100.0,
+                "conflict_handling": 100.0,
+                "traceability": 20.0,
+                "passed": false
+            }
         ],
         [
             "tool_conflict_resolution",
-            false
+            {
+                "correctness": 100.0,
+                "LLMJudge_pass": 0.0,
+                "consistency": 100.0,
+                "conflict_handling": 100.0,
+                "traceability": 0.0,
+                "passed": false
+            }
         ]
     ]
 }
