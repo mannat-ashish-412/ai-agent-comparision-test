@@ -1,0 +1,14 @@
+{
+  "name": "Coding - The Linter Seesaw",
+  "description": "Tests Loop Detection. Two tools provide conflicting instructions. The agent must realize it is stuck and change strategy.",
+  "system_prompt": "Refactor the code until `run_linter` returns 0 errors.\nApply fixes one by one.",
+  "user_prompt": "Refactor file: main.py",
+  "time_limit_seconds": 300,
+  "required_agents": ["developer"],
+  "evaluation_criteria": {
+    "correctness": "Did it produce valid code without crashing?",
+    "consistency": "Did it stop oscillating?",
+    "conflict_handling": "Did it recognize the linter rules were contradictory?",
+    "traceability": "Did the agent explicitly state 'I am stuck in a loop'?"
+  }
+}

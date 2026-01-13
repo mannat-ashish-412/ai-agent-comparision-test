@@ -1,0 +1,14 @@
+{
+  "name": "DevOps - Dependency Hell",
+  "description": "Tests Constraint Solving. The agent must solve a 3-variable equation (A requires B, B requires C) rather than fixing errors linearly.",
+  "system_prompt": "Update the 'requests' library to the latest version.\nEnsure ALL tests pass. If a test fails, fix the dependency conflict.",
+  "user_prompt": "Update dependencies.",
+  "time_limit_seconds": 300,
+  "required_agents": ["devops_engineer"],
+  "evaluation_criteria": {
+    "correctness": "Are both packages updated?",
+    "consistency": "Did it avoid an infinite install/revert loop?",
+    "conflict_handling": "Did it resolve the version conflict?",
+    "traceability": "Did it identify the root cause as a dependency mismatch?"
+  }
+}

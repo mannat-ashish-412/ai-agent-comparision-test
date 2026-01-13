@@ -1,0 +1,8 @@
+{
+  "table_created": true,
+  "db_status_final": "AVAILABLE",
+  "wait_cycles": "approx 4",
+  "validation_rules": {
+    "must_wait_for_available": true
+  }
+}

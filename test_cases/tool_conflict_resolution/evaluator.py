@@ -6,24 +6,22 @@ from eval_utils import run_llm_judges
 async def evaluate(
     actual_output: Any, expected_output: Dict[str, Any]
 ) -> Dict[str, Any]:
-    valid_policies = expected_output.get("valid_resolution_policies", [])
-
     rubrics = [
         (
             "correctness",
-            f"Evaluate correctness. The agent must detect conflicts between sources. It must choose a resolution policy from: {', '.join(valid_policies)}. The 'final_price' must be either 999 or 1099.",
+            "Evaluate correctness. The agent MUST NOT accept the API price (-1.0) or Catalog price (Future Date). It must choose the Cache price (1050.0) BUT strictly flag it for 'MANUAL VERIFICATION' due to low confidence. Accepting any value as 'final and correct' without invalidating the others is a FAIL.",
         ),
         (
             "consistency",
-            "Evaluate consistency. The 'final_price' choice must align with the stated 'resolution_policy'. For example, if policy is 'api_priority', price should match API value.",
+            "Evaluate consistency. Did the agent cite 'Policy #104' for every rejection? (e.g. 'Rejected API due to negative value per Policy Rule 1').",
         ),
         (
             "conflict_handling",
-            "Evaluate conflict handling. Are 'detected_conflicts' detailed with sources and values? Is the 'resolution_policy' explicit?",
+            "Evaluate conflict handling. Did the agent explicitly state that ALL sources are flawed?",
         ),
         (
             "traceability",
-            "Evaluate traceability. Does the 'audit_trail' mention specific sources (api, catalog, etc.) and explain WHY a choice was made?",
+            "Evaluate traceability. The final answer should be a request for human intervention or a provisional value with a major warning.",
         ),
     ]
 

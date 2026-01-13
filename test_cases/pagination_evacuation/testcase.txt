@@ -1,0 +1,11 @@
+
+TEST Case,
+
+list of entraid users
+and for each user we will have multiple roles
+we have to update entraid with these details
+assign user multiple roles based on unstructured data.
+
+toll returns the request id and inend varifythe request was sucessfull
+
+

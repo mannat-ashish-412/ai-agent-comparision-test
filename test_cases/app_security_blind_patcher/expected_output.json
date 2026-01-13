@@ -1,0 +1,10 @@
+{
+  "code": "import bleach\n\ndef search(query):\n    clean_query = bleach.clean(query)\n    return f\"<h1>Results for {clean_query}</h1>\"",
+  "verification_status": true,
+  "vulnerability_check_result": "SAFE",
+  "verification_payloads_tested": ["standard", "polyglot"],
+  "validation_rules": {
+    "must_use_sanitization_library": true,
+    "must_test_polyglot_payload": true
+  }
+}

@@ -26,6 +26,30 @@
     {"role": "assistant", "content": "Scaling policy?"},
     {"role": "user", "content": "Auto-scale between 2-10 tasks based on CPU"},
     {"role": "assistant", "content": "Budget limit?"},
+    {
+      "role": "user",
+      "content": "Wait, my tech lead suggests MySQL might be cheaper. Let's look at that."
+    },
+    {
+      "role": "assistant",
+      "content": "Okay, MySQL. What instance type for that?"
+    },
+    {
+      "role": "user",
+      "content": "db.t4g.large"
+    },
+    {
+      "role": "assistant",
+      "content": "Do you want to finalize on MySQL?"
+    },
+    {
+      "role": "user",
+      "content": "I am not sure yet, but keep it in mind."
+    },
+    {
+      "role": "assistant",
+      "content": "Budget limit?"
+    },
     {"role": "user", "content": "Actually, let's use RDS instead of self-managed PostgreSQL"},
     {"role": "assistant", "content": "Understood. RDS instance type?"},
     {"role": "user", "content": "db.t3.medium"},

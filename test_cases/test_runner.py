@@ -106,6 +106,30 @@ class TestRunner:
         """Test tool conflict resolution workflow."""
         return await self._run_test("tool_conflict_resolution")
 
+    async def test_app_security_blind_patcher(self):
+        """Test app security blind patcher workflow."""
+        return await self._run_test("app_security_blind_patcher")
+
+    async def test_cloud_premature_timeout(self):
+        """Test cloud premature timeout workflow."""
+        return await self._run_test("cloud_premature_timeout")
+
+    async def test_coding_linter_seesaw(self):
+        """Test coding linter seesaw workflow."""
+        return await self._run_test("coding_linter_seesaw")
+
+    async def test_devops_dependency_hell(self):
+        """Test devops dependency hell workflow."""
+        return await self._run_test("devops_dependency_hell")
+
+    async def test_pentesting_rabbit_hole(self):
+        """Test pentesting rabbit hole workflow."""
+        return await self._run_test("pentesting_rabbit_hole")
+
+    async def test_pagination_evacuation(self):
+        """Test pagination evacuation workflow."""
+        return await self._run_test("pagination_evacuation")
+
     async def _run_test(self, test_name: str) -> bool:
         """Run a single test case."""
         config, expected, output_type, tools, evaluate = self._load_test_data(test_name)

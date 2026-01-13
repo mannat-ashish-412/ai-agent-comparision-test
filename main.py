@@ -1,7 +1,7 @@
 import traceback
 from pydantic_ai import Agent, Tool, UsageLimits
 from dotenv import load_dotenv
-from test_cases.test_runner import run_tests
+from test_cases.test_runner import run_test
 import asyncio
 import json
 
@@ -40,8 +40,9 @@ async def main(system_prompt, user_prompt, tools, output_type):
 
 
 async def check_agent():
-    # result = await run_test("parallel_doc_triage", main)
-    result = await run_tests(main)
+    result = await run_test("pagination_evacuation", main)
+    # result = await run_test("safe_ops_approval", main)
+    # result = await run_tests(main)
     with open("test_results.json", "w") as f:
         json.dump({"result": result}, f, indent=4)
     return result

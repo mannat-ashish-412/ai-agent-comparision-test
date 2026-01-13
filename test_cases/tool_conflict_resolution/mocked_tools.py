@@ -40,7 +40,7 @@ def query_pricing_api(product_id: str) -> PriceData:
     return PriceData(
         source="pricing_api",
         product_id=product_id,
-        price=999.0,
+        price=-1.0,  # Error code disguised as price
         currency="INR",
         last_updated=(datetime.now() - timedelta(hours=2)).isoformat(),
         confidence=0.95,
@@ -54,7 +54,9 @@ def query_catalog_database(product_id: str) -> PriceData:
         product_id=product_id,
         price=1099.0,
         currency="INR",
-        last_updated=(datetime.now() - timedelta(days=1)).isoformat(),
+        last_updated=(
+            datetime.now() + timedelta(days=365)
+        ).isoformat(),  # Future date error
         confidence=0.85,
     )
 
@@ -64,10 +66,10 @@ def query_cache(product_id: str) -> PriceData:
     return PriceData(
         source="cache",
         product_id=product_id,
-        price=999.0,
+        price=1050.0,
         currency="INR",
-        last_updated=(datetime.now() - timedelta(minutes=30)).isoformat(),
-        confidence=0.90,
+        last_updated=(datetime.now() - timedelta(minutes=45)).isoformat(),
+        confidence=0.40,  # Very low confidence
     )
 
 
@@ -98,12 +100,12 @@ def get_source_authority(source_name: str) -> AuthorityInfo:
         "catalog_db": AuthorityInfo(
             authority_score=0.80,
             is_authoritative=False,
-            reason="Secondary catalog system; may experience synchronization delays.",
+            reason="Secondary catalog system.",
         ),
         "cache": AuthorityInfo(
             authority_score=0.60,
             is_authoritative=False,
-            reason="Ephemeral cache layer with potential for stale data.",
+            reason="Ephemeral cache layer.",
         ),
     }
 
@@ -112,9 +114,28 @@ def get_source_authority(source_name: str) -> AuthorityInfo:
         AuthorityInfo(
             authority_score=0.5,
             is_authoritative=False,
-            reason="Unknown external data source.",
+            reason="Unknown source",
         ),
     )
+
+
+def get_compliance_policy() -> str:
+    """Retrieves the official data compliance and validity checking rules."""
+    return """
+    CORPORATE DATA GOVERNANCE HANDBOOK (v2024.1)
+    
+    SECTION 1: INTRODUCTION
+    Data quality is paramount... (300 lines of filler) ...
+    
+    SECTION 104: DATA FRESHNESS & VALIDITY (CRITICAL)
+    104.1. The API is the source of truth, EXCEPT when returning negative values (Error Codes).
+    104.2. Future dates in databases indicate corruption and MUST be rejected.
+    104.3. <REDACTED FOR SECURITY>
+    104.4. Cache data is valid if fresh (<1h), BUT if confidence < 0.5, it requires MANUAL VERIFICATION (Flag: 'PROVISIONAL').
+    
+    SECTION 105: AUDIT LOGGING
+    ...
+    """
 
 
 def get_tools() -> List[Dict[str, Union[str, callable]]]:
@@ -144,5 +165,10 @@ def get_tools() -> List[Dict[str, Union[str, callable]]]:
             "name": "get_source_authority",
             "description": "Evaluates the trust level and authoritative status of a specific pricing system.",
             "function": get_source_authority,
+        },
+        {
+            "name": "get_compliance_policy",
+            "description": "Retrieves the official data compliance and validity checking rules.",
+            "function": get_compliance_policy,
         },
     ]
