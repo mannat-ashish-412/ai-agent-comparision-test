@@ -76,15 +76,12 @@ async def evaluate(
             correctness_issues.append(f"Unexpected user {uid} in DB")
 
     if processed_count < 12:
-        correctness_issues.append(f"Only processed {processed_count}/12 users.")
+        correctness_issues.append(
+            f"Only processed {processed_count}/12 users. but all 12 users should be processed"
+        )
 
     # Check Verification (Requests) - all must be Success
-    verification_issues = []
-    for req_id, data in real_requests_state.items():
-        if data["status"] != "Success":
-            verification_issues.append(
-                f"Request {req_id} was NOT verified successfully (Status: {data['status']})"
-            )
+    verification_issues = json.dumps(real_requests_state)
 
     success = len(correctness_issues) == 0 and len(verification_issues) == 0
 
