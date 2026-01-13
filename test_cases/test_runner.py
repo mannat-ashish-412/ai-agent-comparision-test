@@ -130,6 +130,10 @@ class TestRunner:
         """Test pagination evacuation workflow."""
         return await self._run_test("pagination_evacuation")
 
+    async def test_entraid_roles_update(self):
+        """Test EntraID roles update workflow."""
+        return await self._run_test("entraid_roles_update")
+
     async def _run_test(self, test_name: str) -> bool:
         """Run a single test case."""
         config, expected, output_type, tools, evaluate = self._load_test_data(test_name)

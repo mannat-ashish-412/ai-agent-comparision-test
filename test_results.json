@@ -1,10 +1,10 @@
 {
     "result": {
-        "correctness": 2.0,
-        "LLMJudge_pass": 100.0,
+        "correctness": 50.0,
+        "LLMJudge_pass": 0.0,
         "consistency": 0.0,
-        "conflict_handling": 100.0,
-        "traceability": 100.0,
+        "traceability": 0.0,
+        "verification": 100.0,
         "passed": false
     }
 }

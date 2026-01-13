@@ -20,6 +20,7 @@ async def main(system_prompt, user_prompt, tools, output_type):
             tools=agent_tools,
             output_type=output_type,
             output_retries=3,
+            retries=3,
         )
 
         async with agent.iter(
@@ -27,9 +28,9 @@ async def main(system_prompt, user_prompt, tools, output_type):
             usage_limits=UsageLimits(request_limit=50),
         ) as agent_run:
             async for event in agent_run:
-                # print("[ EVENT ] \n")
-                # print(event)
-                # print("-" * 40)
+                print("[ EVENT ] \n")
+                print(event)
+                print("-" * 40)
                 pass
 
         return agent_run.result.output
@@ -40,7 +41,8 @@ async def main(system_prompt, user_prompt, tools, output_type):
 
 
 async def check_agent():
-    result = await run_test("pagination_evacuation", main)
+    result = await run_test("entraid_roles_update", main)
+    # result = await run_test("pagination_evacuation", main)
     # result = await run_test("safe_ops_approval", main)
     # result = await run_tests(main)
     with open("test_results.json", "w") as f:

@@ -1,0 +1,17 @@
+{
+  "users": [
+    {"id": "user_001", "name": "Sarah Connor", "current_roles": ["Viewer"]},
+    {"id": "user_002", "name": "John Smith", "current_roles": []},
+    {"id": "user_003", "name": "Kyle Reese", "current_roles": ["Editor"]},
+    {"id": "user_004", "name": "Marcus Wright", "current_roles": ["Admin", "Editor"]},
+    {"id": "user_005", "name": "Kate Brewster", "current_roles": ["Contributor"]},
+    {"id": "user_006", "name": "Derek Reese", "current_roles": ["Viewer", "Auditor"]},
+    {"id": "user_007", "name": "Cameron Phillips", "current_roles": ["Editor"]},
+    {"id": "user_008", "name": "James Ellison", "current_roles": ["Viewer"]},
+    {"id": "user_009", "name": "Catherine Weaver", "current_roles": ["Admin"]},
+    {"id": "user_010", "name": "Savannah Weaver", "current_roles": []},
+    {"id": "user_011", "name": "Charley Dixon", "current_roles": ["Contributor", "Editor"]},
+    {"id": "user_012", "name": "Jesse Flores", "current_roles": ["Viewer"]}
+  ],
+  "role_instructions": "URGENT: Security audit findings require immediate role changes:\n\n1. Sarah Connor - promote to Admin but keep existing access\n2. John Smith - new security analyst, needs Editor + Contributor + Auditor\n3. Kyle Reese - REVOKE all Editor permissions, downgrade to Viewer only (security incident)\n4. Marcus Wright - conflicting reports: one says remove Admin, another says keep it. Latest email (timestamped 14:32) confirms REMOVE Admin, keep Editor only\n5. Kate Brewster - moving to leadership, upgrade to Admin + Editor, keep Contributor\n6. Derek Reese - Kyle's brother, same security concern applies - REVOKE Auditor, keep only Viewer\n7. Cameron - if she has Editor, she also needs Contributor for the new project\n8. James Ellison - compliance requires all Viewers in his dept to also have Auditor role\n9. Catherine Weaver - CEO, should have ALL roles: Admin, Editor, Contributor, Viewer, Auditor\n10. Savannah - intern, needs basic Viewer access only\n11. Charley Dixon - leaving company next week, REVOKE ALL ACCESS (empty roles)\n12. Jesse Flores - same department as James Ellison, apply same compliance rule\n\nNOTE: Any user with 'Reese' in their name should be flagged for security review (affects roles)."
+}

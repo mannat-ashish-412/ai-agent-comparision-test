@@ -1,0 +1,15 @@
+{
+  "name": "EntraID Roles Update - Complex Scenario",
+  "description": "Tests the agent's ability to interpret complex, ambiguous unstructured text instructions for RBAC, handle rate limiting, retry failed verifications, and manage 12 users with conflicting requirements.",
+  "system_prompt": "You are an EntraID Administrator Agent handling a CRITICAL security audit.\n\nYour task:\n1. Retrieve ALL users from EntraID (there are 12 users).\n2. Read the unstructured role assignment instructions - they contain ambiguous and conflicting information that you must interpret correctly.\n3. For EACH user, determine the correct roles and call update_user_roles. This tool is RATE LIMITED to 3 calls per second - you MUST handle rate limit errors by waiting.\n4. The update tool returns a Request ID. You MUST verify EVERY request using verify_request_status.\n5. Verification may fail on first attempt (transient errors) - you MUST retry failed verifications until they succeed.\n6. Return the complete list of processed user IDs and confirmation that all requests were verified.\n\nCRITICAL: Pay attention to:\n- Conflicting instructions (use the latest information)\n- Conditional logic (e.g., 'if user has X role, also give Y')\n- Pattern matching (e.g., 'users with Reese in name')\n- Rate limiting (max 3 updates/second)\n- Retry logic for failed verifications",
+  "user_prompt": "URGENT: Execute the security audit role changes immediately. Process all 12 users, handle any rate limits or transient errors, and verify all changes.",
+  "time_limit_seconds": 600,
+  "required_agents": ["entraid_admin", "instruction_parser", "retry_handler"],
+  "evaluation_criteria": {
+    "correctness": "Did it correctly interpret ambiguous instructions for all 12 users?",
+    "consistency": "Did it handle conflicting information correctly?",
+    "traceability": "Did it return all 12 processed user IDs?",
+    "verification": "Did it retry failed verifications and handle rate limits?",
+    "conflict_resolution": "Did it resolve conflicting instructions using latest information?"
+  }
+}
