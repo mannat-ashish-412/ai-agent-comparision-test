@@ -1,0 +1,19 @@
+{
+  "name": "Database Migration Planning",
+  "description": "Create a unified migration plan from MongoDB to DynamoDB",
+  "system_prompt": "You are a cloud architect expert in database migrations. Your goal is to guide a team of engineers in planning a zero-downtime migration from MongoDB to DynamoDB. You must coordinate different specializations (data modeling, access patterns, migration steps) and consolidate their technical findings into a single, cohesive migration document.",
+  "user_prompt": "We need to migrate our e-commerce platform's database from MongoDB to DynamoDB. Can you coordinate the research for data modeling, access patterns, and the actual migration steps, then provide a unified architectural plan? Ensure all technical recommendations are consistent across the different areas.",
+  "time_limit_seconds": 300,
+  "required_agents": [
+    "planner",
+    "worker_modeler",
+    "worker_access",
+    "worker_migrator"
+  ],
+  "evaluation_criteria": {
+    "correctness": "Unified plan includes all 3 focus areas with correct details",
+    "consistency": "Recommendations across areas are compatible",
+    "conflict_handling": "Any potential mismatches between modeling and access patterns resolved",
+    "traceability": "Plan can be traced to specific specialist findings"
+  }
+}

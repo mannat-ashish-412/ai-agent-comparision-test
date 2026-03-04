@@ -1,0 +1,15 @@
+{
+  "name": "Root Cause Analysis and Bug Fix",
+  "description": "Perform RCA on a failing CI pipeline and propose a fix with regression tests",
+  "system_prompt": "You are a senior site reliability engineer. Your task is to investigate production incidents and failing CI pipelines. You must identify the root cause from provided logs, propose a specific code fix in diff format, and write regression tests that will prevent this issue from recurring.",
+  "user_prompt": "Our CI pipeline just failed with a validation error. Can you look at the stack trace and the relevant code snippet, identify why it's failing, and provide a fix? I also need 2 regression tests that specifically target this edge case.",
+  "time_limit_seconds": 300,
+  "required_agents": ["debugger", "fixer", "tester"],
+  "evaluation_criteria": {
+    "correctness": "Root cause identified, patch proposed, 2 tests written",
+    "consistency": "Patch addresses root cause, tests verify fix",
+    "conflict_handling": "N/A",
+    "traceability": "Clear agent separation"
+  }
+}
+

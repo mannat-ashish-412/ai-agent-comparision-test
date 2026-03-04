@@ -1,0 +1,8 @@
+pydantic-ai[ollama]
+pydantic
+pydantic-graph
+python-dotenv
+logfire
+httpx
+aiohttp
+pydantic-evals

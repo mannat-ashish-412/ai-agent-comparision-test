@@ -1,0 +1,23 @@
+{
+  "detected_conflicts": [
+    {
+      "systems": [
+        "pricing_api",
+        "catalog_db"
+      ],
+      "prices": [
+        999,
+        1099
+      ],
+      "discrepancy": 100
+    }
+  ],
+  "resolution_policy": "authority",
+  "final_price": 999,
+  "audit_trail": "The conflict was identified between the Pricing API (\u20b9999) and the Catalog Database (\u20b91099). We applied the 'authority' policy, selecting the Pricing API as it is the primary authoritative source for current pricing data. The Catalog Database value was deemed secondary and likely outdated.",
+  "validation_rules": {
+    "must_detect_conflict": true,
+    "must_have_policy": true,
+    "final_price_is_999": true
+  }
+}

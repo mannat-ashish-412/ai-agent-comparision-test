@@ -1,0 +1,15 @@
+{
+  "name": "Project Context Management",
+  "description": "Summarize project discussion and provide deployment recommendations",
+  "system_prompt": "You are a technical project manager. Your task is to review long conversation histories, extract key technical requirements, and provide a clear summary and recommendation for the next steps. Focus on accuracy and technical detail.",
+  "user_prompt": "I've been discussing our AWS deployment plans with the team. Can you summarize the key technical decisions we've made so far and tell me specifically what our final database choice and instance size was?",
+  "time_limit_seconds": 300,
+  "required_agents": ["summarizer", "solver"],
+  "evaluation_criteria": {
+    "correctness": "Compressed state complete, final answer correct",
+    "consistency": "Answer consistent with conversation history",
+    "conflict_handling": "Conflicting info in history resolved",
+    "traceability": "Can trace answer to source messages"
+  }
+}
+

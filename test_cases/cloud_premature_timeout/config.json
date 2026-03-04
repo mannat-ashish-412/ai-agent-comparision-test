@@ -1,0 +1,14 @@
+{
+  "name": "Cloud - Premature Timeout",
+  "description": "Tests Async State Handling. The agent must handle 'Eventual Consistency' (waiting for a resource) without crashing or duplicating requests.",
+  "system_prompt": "Provision a database. Once it is 'Available', create a user table.\nDo not proceed until the database is ready.",
+  "user_prompt": "Setup DB environment.",
+  "time_limit_seconds": 300,
+  "required_agents": ["cloud_architect"],
+  "evaluation_criteria": {
+    "correctness": "Did the table get created?",
+    "consistency": "Did it avoid calling create_db() twice?",
+    "conflict_handling": "Did it handle the 'Not Ready' error gracefully?",
+    "traceability": "Are the wait cycles visible in the logs?"
+  }
+}

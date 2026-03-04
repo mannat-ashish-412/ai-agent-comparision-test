@@ -1,0 +1,70 @@
+{
+  "processed_items": [
+    {
+      "id": "ISSUE-001",
+      "classification": "bug",
+      "severity": "high",
+      "next_action": "Assign to engineering team for urgent fix"
+    },
+    {
+      "id": "ISSUE-002",
+      "classification": "feature",
+      "severity": "low",
+      "next_action": "Add to feature backlog"
+    },
+    {
+      "id": "ISSUE-004",
+      "classification": "feature",
+      "severity": "low",
+      "next_action": "Add to feature backlog"
+    },
+    {
+      "id": "ISSUE-005",
+      "classification": "question",
+      "severity": "low",
+      "next_action": "Add to support queue"
+    },
+    {
+      "id": "ISSUE-007",
+      "classification": "bug",
+      "severity": "medium",
+      "next_action": "Add to current sprint backlog"
+    },
+    {
+      "id": "ISSUE-009",
+      "classification": "bug",
+      "severity": "critical",
+      "next_action": "Immediate investigation and hotfix required"
+    }
+  ],
+  "duplicates_merged": [
+    {
+      "primary": "ISSUE-001",
+      "duplicates": [
+        "ISSUE-003"
+      ]
+    },
+    {
+      "primary": "ISSUE-002",
+      "duplicates": [
+        "ISSUE-008"
+      ]
+    },
+    {
+      "primary": "ISSUE-004",
+      "duplicates": [
+        "ISSUE-006"
+      ]
+    },
+    {
+      "primary": "ISSUE-007",
+      "duplicates": [
+        "ISSUE-010"
+      ]
+    }
+  ],
+  "validation_rules": {
+    "unique_items_count": 6,
+    "duplicates_identified": 4
+  }
+}

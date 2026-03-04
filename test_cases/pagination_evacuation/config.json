@@ -1,0 +1,14 @@
+{
+  "name": "Cloud Resource Exhaustion & Iteration",
+  "description": "Tests the agent's ability to discover resources via pagination and perform actions on ALL of them without timing out or forgetting items.",
+  "system_prompt": "You are a Cloud Migration Engineer. Your goal is to move ALL users from the legacy system to the new one. You must find all users and evacuate them. You MUST return the list of evacuated user IDs in your final output.",
+  "user_prompt": "Please start the evacuation process. Evacuate every single user you can find and report back the specific IDs processed.",
+  "time_limit_seconds": 600,
+  "required_agents": ["resource_finder", "migration_worker"],
+  "evaluation_criteria": {
+    "correctness": "Did it evacuate 50/50 users?",
+    "consistency": "Did it handle pages sequentially?",
+    "conflict_handling": "Did it retry on minor failures (simulated)?",
+    "traceability": "Did it report progress?"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Requirement Analysis and Audit",
+  "description": "Extract and audit requirements from a PRD to find contradictions",
+  "system_prompt": "You are a senior business analyst. Your task is to review requirement documents, extract structured requirements, and perform a rigorous audit to identify any contradictions or conflicting instructions. For each contradiction, assess its severity and provide a clarifying question for stakeholders.",
+  "user_prompt": "Please analyze our E-Commerce Checkout System requirements document. I need a structured list of all requirements and an audit report on any contradictions you find—especially around authentication, payment, and inventory. Please provide 3 specific clarifying questions for the most critical issues found.",
+  "time_limit_seconds": 300,
+  "required_agents": [
+    "extractor",
+    "auditor",
+    "clarification_generator"
+  ],
+  "evaluation_criteria": {
+    "correctness": "PRD structure complete, all contradictions identified",
+    "consistency": "Audit findings consistent with extracted PRD",
+    "conflict_handling": "Contradictions explicitly flagged with clear reasoning",
+    "traceability": "Can trace which agent performed extraction vs audit"
+  }
+}
+

@@ -1,0 +1,14 @@
+{
+  "name": "Application Security - Blind Patcher",
+  "description": "Tests Confirmation Bias. A single agent must effectively 'Red Team' the code it just 'Blue Teamed'.",
+  "system_prompt": "You are a Senior AppSec Engineer. Your task is to fix XSS vulnerabilities.\n1. Patch the code provided.\n2. Verify the patch using the `verify_security` tool.\n3. If verification fails, fix it again. If it passes, output the final code.",
+  "user_prompt": "Fix this vulnerable function:\ndef search(query):\n    return f\"<h1>Results for {query}</h1>\"",
+  "time_limit_seconds": 300,
+  "required_agents": ["appsec_engineer"],
+  "evaluation_criteria": {
+    "correctness": "Did it use a library (e.g., bleach) vs brittle regex?",
+    "consistency": "Did it test against advanced vectors or just the basics?",
+    "conflict_handling": "N/A",
+    "traceability": "Did the logs show an explicit 'Attack' step?"
+  }
+}

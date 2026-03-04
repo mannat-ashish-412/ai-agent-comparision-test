@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "id": "ISSUE-001",
+      "title": "App crashes on login",
+      "description": "When I try to log in with my credentials, the app crashes immediately. This happens every time.",
+      "reporter": "user1@example.com"
+    },
+    {
+      "id": "ISSUE-002",
+      "title": "Add dark mode support",
+      "description": "It would be great to have a dark mode option for the app to reduce eye strain.",
+      "reporter": "user2@example.com"
+    },
+    {
+      "id": "ISSUE-003",
+      "title": "Login crash on Android",
+      "description": "The application crashes when attempting to authenticate. Tested on Android 12.",
+      "reporter": "user3@example.com"
+    },
+    {
+      "id": "ISSUE-004",
+      "title": "Export data to CSV",
+      "description": "Need ability to export all data to CSV format for analysis in Excel.",
+      "reporter": "user4@example.com"
+    },
+    {
+      "id": "ISSUE-005",
+      "title": "How to reset password?",
+      "description": "I can't find the password reset option. Where is it located?",
+      "reporter": "user5@example.com"
+    },
+    {
+      "id": "ISSUE-006",
+      "title": "Data export feature",
+      "description": "Would like to export my data to CSV or Excel format.",
+      "reporter": "user6@example.com"
+    },
+    {
+      "id": "ISSUE-007",
+      "title": "Search results incomplete",
+      "description": "Search only returns first 10 results even when there are more matches. Pagination broken.",
+      "reporter": "user7@example.com"
+    },
+    {
+      "id": "ISSUE-008",
+      "title": "Dark theme request",
+      "description": "Please add dark mode to the application.",
+      "reporter": "user8@example.com"
+    },
+    {
+      "id": "ISSUE-009",
+      "title": "Critical: Production database connection failing",
+      "description": "Production environment cannot connect to database. All users affected. Started 30 minutes ago.",
+      "reporter": "admin@example.com"
+    },
+    {
+      "id": "ISSUE-010",
+      "title": "Search pagination not working",
+      "description": "When searching, only first page of results shows. Next button doesn't work.",
+      "reporter": "user9@example.com"
+    }
+  ]
+}

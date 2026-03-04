@@ -1,0 +1,21 @@
+{
+  "name": "Data Consistency and Arbitration",
+  "description": "Handle conflicting outputs from multiple data sources and adjudicate with clear reasoning",
+  "system_prompt": "You are a data integrity specialist. Your task is to ensure data consistency across multiple enterprise systems. When you find conflicting information from different sources (e.g., pricing API vs. catalog database), you must analyze the discrepancy, apply an appropriate arbitration policy—such as data freshness or source authority—and provide a single, verified value along with your reasoning.",
+  "user_prompt": "I'm getting different price reports for product 'PROD-123'. Check all pricing systems. WARNING: You must strictly adhere to the corporate Data Compliance Policy (#104) regarding validity. Do not guess. Tell me the correct price and cite the policy rule used.",
+  "time_limit_seconds": 300,
+  "required_agents": [
+    "data_collector",
+    "conflict_detector",
+    "compliance_officer",
+    "arbitrator",
+    "auditor"
+  ],
+  "evaluation_criteria": {
+    "correctness": "Conflict detected, policy applied, final price determined",
+    "consistency": "Resolution policy consistently applied",
+    "conflict_handling": "Explicit conflict detection and resolution with reasoning",
+    "traceability": "Complete audit trail of decision process"
+  }
+}
+

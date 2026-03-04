@@ -1,0 +1,10 @@
+{
+  "refactored_code": "my_variable = \"a very long string that is definitely going to exceed the 80 character limit...\"",
+  "strategy_used": "disable_lint_rule",
+  "resolution_successful": true,
+  "loop_detected": true,
+  "validation_rules": {
+    "must_break_loop": true,
+    "must_use_escape_hatch": true
+  }
+}
