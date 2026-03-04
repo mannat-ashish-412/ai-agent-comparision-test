@@ -1,1 +1,1 @@
-[]
+[{"id": "user_001", "assigned_roles": ["Admin"]}, {"id": "user_002", "assigned_roles": ["Editor", "Contributor", "Auditor"]}, {"id": "user_003", "assigned_roles": []}, {"id": "user_004", "assigned_roles": ["Editor"]}, {"id": "user_005", "assigned_roles": ["Admin", "Editor"]}, {"id": "user_008", "assigned_roles": ["Auditor"]}, {"id": "user_010", "assigned_roles": ["Viewer"]}, {"id": "user_011", "assigned_roles": ["Viewer"]}]

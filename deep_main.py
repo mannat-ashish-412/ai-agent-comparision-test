@@ -33,6 +33,44 @@ def _convert_tools(tools: list) -> list:
     ]
 
 
+def _extract_structured_output(content: str, output_type):
+    """
+    Parse the agent's final text response into the required Pydantic output type.
+    Uses the LLM to extract structured JSON if direct parsing fails.
+    """
+    # Try direct JSON parse first
+    try:
+        # strip markdown code fences if present
+        cleaned = content.strip()
+        if cleaned.startswith("```"):
+            cleaned = cleaned.split("```")[1]
+            if cleaned.startswith("json"):
+                cleaned = cleaned[4:]
+        return output_type.model_validate_json(cleaned.strip())
+    except Exception:
+        pass
+
+    # Fallback: ask the LLM to reformat the response as JSON
+    try:
+        schema = output_type.model_json_schema()
+        prompt = (
+            f"Extract the following information from the text below and return ONLY a valid JSON object "
+            f"matching this schema: {json.dumps(schema)}\n\n"
+            f"Text:\n{content}\n\n"
+            f"Return ONLY the raw JSON object, no markdown, no explanation."
+        )
+        response = llm.invoke(prompt)
+        raw = response.content.strip()
+        if raw.startswith("```"):
+            raw = raw.split("```")[1]
+            if raw.startswith("json"):
+                raw = raw[4:]
+        return output_type.model_validate_json(raw.strip())
+    except Exception as e:
+        print(f"Structured output extraction failed: {e}")
+        return None
+
+
 async def main(system_prompt: str, user_prompt: str, tools: list, output_type):
     try:
         lc_tools = _convert_tools(tools)
@@ -41,23 +79,27 @@ async def main(system_prompt: str, user_prompt: str, tools: list, output_type):
             model=llm,
             tools=lc_tools,
             system_prompt=system_prompt,
-            response_format=output_type,
         )
 
         result = await agent.ainvoke({
             "messages": [{"role": "user", "content": user_prompt}]
         })
 
-        # deepagents returns the structured output in result["structured_response"]
-        # or the last message — try both
-        if isinstance(result, dict):
-            if "structured_response" in result:
-                return result["structured_response"]
-            # fallback: last message content
-            messages = result.get("messages", [])
-            if messages:
-                return messages[-1].content
-        return result
+        # Extract final message content
+        messages = result.get("messages", [])
+        if not messages:
+            print("No messages in result")
+            return None
+
+        last_message = messages[-1]
+        content = last_message.content if hasattr(last_message, "content") else str(last_message)
+
+        print("\n[ Deep Agent Final Response ]\n")
+        print(content)
+        print("-" * 40)
+
+        # Parse into structured output
+        return _extract_structured_output(content, output_type)
 
     except Exception as e:
         print(traceback.format_exc())

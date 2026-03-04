@@ -1,9 +1,18 @@
 import asyncio
+import os
 from pydantic_evals.evaluators import LLMJudge, EvaluatorContext
+from pydantic_ai.models.openai import OpenAIModel
+from pydantic_ai.providers.ollama import OllamaProvider
+
+
+def _get_judge_model():
+    base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1")
+    provider = OllamaProvider(base_url=base_url)
+    return OpenAIModel("qwen2.5:14b", provider=provider)
 
 
 async def run_llm_judges(
-    actual_output, expected_output, rubrics_with_names, model="ollama:qwen2.5:14b"
+    actual_output, expected_output, rubrics_with_names, model=None
 ):
     """
     Run multiple LLM judges on the same output/expected_output pair.
@@ -12,11 +21,14 @@ async def run_llm_judges(
         actual_output: The actual output from the agent
         expected_output: The expected output dictionary
         rubrics_with_names: List of (name, rubric) tuples
-        model: The model to use for the judge
+        model: The model to use for the judge (defaults to qwen2.5:14b via Ollama)
 
     Returns:
         Dict[str, float]: Dictionary of scores (0-100)
     """
+    if model is None:
+        model = _get_judge_model()
+
     judges = [
         LLMJudge(rubric=rubric, score={"evaluation_name": name}, model=model)
         for name, rubric in rubrics_with_names
@@ -39,15 +51,12 @@ async def run_llm_judges(
     scores = {}
     for result in results:
         for name, value_attr in result.items():
-            # LLMJudge might return a dictionary of numeric scores (dict[str, float])
-            # or a dictionary of EvaluationReason objects (dict[str, EvaluationReason])
             print(f"{name}: {value_attr}")
             print("-" * 40)
             val = getattr(value_attr, "value", value_attr)
 
             if isinstance(val, (int, float)):
                 f_val = float(val)
-                # Some models return 0-100, others return 0-1
                 if f_val > 1.0:
                     scores[name] = min(f_val, 100.0)
                 else:
