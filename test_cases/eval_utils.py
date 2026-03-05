@@ -3,7 +3,7 @@ import os
 import json
 from pydantic_ai import Agent
 from pydantic_ai.models.openai import OpenAIModel
-from pydantic_ai.providers.ollama import OllamaProvider
+from pydantic_ai.providers.openai import OpenAIProvider
 from pydantic import BaseModel
 
 
@@ -14,9 +14,10 @@ class JudgeResult(BaseModel):
 
 
 def _get_judge_model():
-    base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1")
-    provider = OllamaProvider(base_url=base_url)
-    return OpenAIModel("qwen2.5:14b", provider=provider)
+    return OpenAIModel(
+        "gpt-5-mini-2025-08-07",
+        provider=OpenAIProvider(api_key=os.getenv("OPENAI_API_KEY"))
+    )
 
 
 async def _run_single_judge(name: str, rubric: str, actual_output, expected_output, model) -> tuple[str, float]:
@@ -52,18 +53,6 @@ async def _run_single_judge(name: str, rubric: str, actual_output, expected_outp
 async def run_llm_judges(
     actual_output, expected_output, rubrics_with_names, model=None
 ):
-    """
-    Run multiple LLM judges on the same output/expected_output pair.
-
-    Args:
-        actual_output: The actual output from the agent
-        expected_output: The expected output dictionary
-        rubrics_with_names: List of (name, rubric) tuples
-        model: The model to use for the judge
-
-    Returns:
-        Dict[str, float]: Dictionary of scores (0-100)
-    """
     if model is None:
         model = _get_judge_model()
 

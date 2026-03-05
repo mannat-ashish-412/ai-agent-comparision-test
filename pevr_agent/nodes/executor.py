@@ -63,12 +63,11 @@ async def executor_node(state: WorkflowState, config: RunnableConfig):
     # Let's try to construct a new agent instance here for now to support dynamic tools from main.py
 
     from pydantic_ai import Agent
-    from pydantic_ai.providers.ollama import OllamaProvider
+    from pydantic_ai.providers.openai import OpenAIProvider
     from pydantic_ai.models.openai import OpenAIModel
     import os
 
-    _base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1")
-    _model = OpenAIModel("qwen2.5:14b", provider=OllamaProvider(base_url=_base_url))
+    _model = OpenAIModel("gpt-5-mini-2025-08-07", provider=OpenAIProvider(api_key=os.getenv("OPENAI_API_KEY")))
 
     runtime_worker = Agent(
         _model,

@@ -1,10 +1,10 @@
 import traceback
 from pydantic_ai import Agent, Tool, UsageLimits
 from pydantic_ai.models.openai import OpenAIModel
-from pydantic_ai.providers.ollama import OllamaProvider
+from pydantic_ai.providers.openai import OpenAIProvider
 from dotenv import load_dotenv
 from pydantic_graph import End
-from test_cases.test_runner import run_test
+from test_cases.test_runner import run_test, run_tests
 import asyncio
 import json
 import os
@@ -26,8 +26,8 @@ Do NOT wrap it in markdown. Do NOT call any more tools. Just return the raw JSON
 
 async def main(system_prompt, user_prompt, tools, output_type):
     try:
-        provider = OllamaProvider(base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1"))
-        model = OpenAIModel("qwen2.5:14b", provider=provider)
+        provider = OpenAIProvider(api_key=os.getenv("OPENAI_API_KEY"))
+        model = OpenAIModel("gpt-5-mini-2025-08-07", provider=provider)
 
         agent_tools = [Tool(**tool, max_retries=3) for tool in tools]
 
@@ -65,13 +65,10 @@ async def main(system_prompt, user_prompt, tools, output_type):
 
 
 async def check_agent():
-    result = await run_test("entraid_roles_update", main)
-    # result = await run_test("pagination_evacuation", main)
-    # result = await run_test("safe_ops_approval", main)
-    # result = await run_tests(main)
-    with open("test_results.json", "w") as f:
-        json.dump({"result": result}, f, indent=4)
-    return result
+    results = await run_tests(main)
+    with open("test_results_pydantic.json", "w") as f:
+        json.dump({"results": str(results)}, f, indent=4)
+    return results
 
 
 if __name__ == "__main__":

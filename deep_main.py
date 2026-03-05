@@ -1,7 +1,7 @@
 import traceback
 import asyncio
 import json
-from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 from langchain_core.tools import StructuredTool
 from deepagents import create_deep_agent
 from dotenv import load_dotenv
@@ -10,19 +10,14 @@ import os
 
 load_dotenv()
 
-llm = ChatOllama(
-    model="qwen2.5:14b",
-    base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434").replace("/v1", ""),
+llm = ChatOpenAI(
+    model="gpt-5-mini-2025-08-07",
+    api_key=os.getenv("OPENAI_API_KEY"),
     temperature=0,
-    num_ctx=8192,
 )
 
 
 def _convert_tools(tools: list) -> list:
-    """
-    Convert test_runner tool dicts (name, description, function)
-    into LangChain StructuredTool objects that deepagents can use.
-    """
     return [
         StructuredTool.from_function(
             func=t["function"],
@@ -34,13 +29,7 @@ def _convert_tools(tools: list) -> list:
 
 
 def _extract_structured_output(content: str, output_type):
-    """
-    Parse the agent's final text response into the required Pydantic output type.
-    Uses the LLM to extract structured JSON if direct parsing fails.
-    """
-    # Try direct JSON parse first
     try:
-        # strip markdown code fences if present
         cleaned = content.strip()
         if cleaned.startswith("```"):
             cleaned = cleaned.split("```")[1]
@@ -50,7 +39,6 @@ def _extract_structured_output(content: str, output_type):
     except Exception:
         pass
 
-    # Fallback: ask the LLM to reformat the response as JSON
     try:
         schema = output_type.model_json_schema()
         prompt = (
@@ -85,7 +73,6 @@ async def main(system_prompt: str, user_prompt: str, tools: list, output_type):
             "messages": [{"role": "user", "content": user_prompt}]
         })
 
-        # Extract final message content
         messages = result.get("messages", [])
         if not messages:
             print("No messages in result")
@@ -98,7 +85,6 @@ async def main(system_prompt: str, user_prompt: str, tools: list, output_type):
         print(content)
         print("-" * 40)
 
-        # Parse into structured output
         return _extract_structured_output(content, output_type)
 
     except Exception as e:
@@ -108,13 +94,10 @@ async def main(system_prompt: str, user_prompt: str, tools: list, output_type):
 
 
 async def check_agent():
-    result = await run_test("entraid_roles_update", main)
-    # result = await run_test("pagination_evacuation", main)
-    # result = await run_test("safe_ops_approval", main)
-    # results = await run_tests(main)
+    results = await run_tests(main)
     with open("test_results_deepagent.json", "w") as f:
-        json.dump({"result": str(result)}, f, indent=4)
-    return result
+        json.dump({"results": str(results)}, f, indent=4)
+    return results
 
 
 if __name__ == "__main__":
